@@ -45,11 +45,11 @@
             }
             
             setTimeout( () => {
-                deleteToDoItem(todoList.firstChild);
+                deleteToDoItem(todoList.firstElementChild);
             },3000);
 
             function completeTodoItem(item){
-                itemm.classList.toggle("completed");
+                item.classList.toggle("completed");
             }
 
             setTimeout( () => {
