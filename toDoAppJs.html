@@ -26,6 +26,36 @@
         </template>
         <script>
             const todoList = document.querySelector("#todo-list");
+            const todoItemTmpl = document.querySelector("#todo-item-tmpl");
+            const todoItem = todoItemTmpl.content;
+
+            function createTodoItem(value){
+                const newItem =  todoItem.cloneNode(true);
+                const newTitle = newItem.querySelector(".todo-title");
+                newTitle.textContent = value;
+                todoList.append(newItem);
+            }
+
+            createTodoItem("first task");
+            createTodoItem("second task");
+            createTodoItem("third task");
+
+            function deleteToDoItem(item){
+                item.remove();
+            }
+            
+            setTimeout( () => {
+                deleteToDoItem(todoList.firstChild);
+            },3000);
+
+            function completeTodoItem(item){
+                itemm.classList.toggle("completed");
+            }
+
+            setTimeout( () => {
+                completeTodoItem(todoList.lastElementChild);
+            },5000);
+
         </script>
     </body>
 </html>
