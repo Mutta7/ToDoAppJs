@@ -13,11 +13,16 @@
         <div id="task-zone">
             <h1>these are you tasks : </h1>
         </div>
+        <div>
+            <button id ="minus">-</button>
+            <span id="number">0</span>
+            <button id="plus">+</button>
+        </div>
         <div id="todo-container">
             <input type="text" name="" id="create-input" />
             <button id="create-btn">Add</button>
             <ul id="todo-list">
-
+                <!-- add to-do item here -->
             </ul>
         </div>
         <template id="todo-item-tmpl">
@@ -28,6 +33,19 @@
             </li>
         </template>
         <script>
+            let count = 0;
+            const number = document.querySelector("#number")
+            const plusBtn = document.querySelector("#plus")
+            const minusBtn = document.querySelector("#minus")
+
+            plusBtn.addEventListener("click", function(event){
+                count++;
+                number.textContent = count;
+            })
+            minusBtn.addEventListener("click", function(event){
+                count--;
+                number.textContent=count;
+            })
             const taskZone = document.querySelector("#task-zone");
             taskZone.onmouceenter = () => {
                 taskZone.style.background = "#f0ffff"
@@ -40,32 +58,43 @@
             const todoItemTmpl = document.querySelector("#todo-item-tmpl");
             const todoItem = todoItemTmpl.content;
 
+            const createInput = document.querySelector("#create-input")
+            const createBtn = document.querySelector("#create-btn");
+            
             function createTodoItem(value){
                 const newItem =  todoItem.cloneNode(true);
                 const newTitle = newItem.querySelector(".todo-title");
+
+                const deleteBtn = newItem.querySelector(".delete-btn");
+                const completeBtn = newItem.querySelector(".complete-btn");
+
                 newTitle.textContent = value;
+                
+
+                deleteBtn.addEventListener("click", (event) =>{
+                     deleteToDoItem(event.target.parentElement);
+                });
+
+                completeBtn.addEventListener("click", (event)=>{
+                    completeTodoItem(event.target.parentElement);
+                });
+
                 todoList.append(newItem);
             }
-
-            createTodoItem("first task");
-            createTodoItem("second task");
-            createTodoItem("third task");
 
             function deleteToDoItem(item){
                 item.remove();
             }
             
-            setTimeout( () => {
-                deleteToDoItem(todoList.firstElementChild);
-            },3000);
-
             function completeTodoItem(item){
                 item.classList.toggle("completed");
             }
 
-            setTimeout( () => {
-                completeTodoItem(todoList.lastElementChild);
-            },5000);
+            createBtn.addEventListener("click", () => {
+                createTodoItem(createInput.value);
+            });
+
+
 
         </script>
     </body>
