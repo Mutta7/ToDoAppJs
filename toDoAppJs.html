@@ -10,6 +10,9 @@
         </style>
     </head>
     <body>
+        <div id="task-zone">
+            <h1>these are you tasks : </h1>
+        </div>
         <div id="todo-container">
             <input type="text" name="" id="create-input" />
             <button id="create-btn">Add</button>
@@ -25,6 +28,14 @@
             </li>
         </template>
         <script>
+            const taskZone = document.querySelector("#task-zone");
+            taskZone.onmouceenter = () => {
+                taskZone.style.background = "#f0ffff"
+            }
+            taskZone.onmouseleave = () => {
+                taskZone.style.background = "#ffe4c4"
+            }
+
             const todoList = document.querySelector("#todo-list");
             const todoItemTmpl = document.querySelector("#todo-item-tmpl");
             const todoItem = todoItemTmpl.content;
